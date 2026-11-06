@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Impact Portal | Project Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f8f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+.main-header {
+    background-color: #14532d;
+    color: white;
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo strong {
+    font-size: 27px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.main-nav a:hover {
+    color: #a7f3d0;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 400px;
+    background: linear-gradient(
+        rgba(20, 83, 45, 0.85),
+        rgba(22, 101, 52, 0.85)
+    ),
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80");
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    padding: 70px 0;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.hero p {
+    font-size: 17px;
+    max-width: 750px;
+    margin: 0 auto 30px;
+    color: #e5f5e9;
+}
+
+/* Primary Button */
+.btn-primary {
+    display: inline-block;
+    background-color: #facc15;
+    color: #14532d;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+}
+
+/* Main Sections */
+main {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.section-card {
+    background-color: white;
+    padding: 35px;
+    margin: 30px 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border-left: 5px solid #16a34a;
+}
+
+.section-card h2 {
+    color: #166534;
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #dcfce7;
+    padding-bottom: 12px;
+}
+
+.section-card h3 {
+    color: #15803d;
+    margin-bottom: 12px;
+}
+
+.section-card p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Two Column Grid */
+.grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+}
+
+.bullet-list {
+    padding-left: 22px;
+}
+
+.bullet-list li {
+    margin-bottom: 12px;
+    color: #444;
+}
+
+/* Statistics */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat-item {
+    background-color: #dcfce7;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px;
+    border-bottom: 4px solid #16a34a;
+}
+
+.stat-number {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    color: #166534;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #555;
+}
+
+/* Timeline */
+.timeline-container {
+    border-left: 3px solid #16a34a;
+    margin-left: 15px;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    background-color: #f0fdf4;
+    padding: 22px;
+    border-radius: 10px;
+}
+
+.timeline-badge {
+    display: inline-block;
+    background-color: #15803d;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.timeline-content h3 {
+    color: #14532d;
+}
+
+.date-tag {
+    display: inline-block;
+    color: #166534;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* Reports Table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.report-table th {
+    background-color: #166534;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+.report-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    color: #444;
+}
+
+.report-table tbody tr:nth-child(even) {
+    background-color: #f0fdf4;
+}
+
+.report-table tbody tr:hover {
+    background-color: #dcfce7;
+}
+
+/* Status Labels */
+.status-pill {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-complete {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-progress {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    background-color: #f0fdf4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-placeholder {
+    height: 180px;
+    background: linear-gradient(135deg, #166534, #86efac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+.gallery-caption {
+    padding: 15px;
+    font-size: 13px;
+    color: #555;
+}
+
+/* Volunteers */
+.grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.volunteer-card {
+    background-color: #f0fdf4;
+    padding: 25px;
+    border-radius: 10px;
+    border-top: 4px solid #16a34a;
+    transition: 0.3s;
+}
+
+.volunteer-card:hover {
+    background-color: #dcfce7;
+    transform: translateY(-5px);
+}
+
+.volunteer-card h4 {
+    color: #14532d;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.role-tag {
+    color: #15803d !important;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Footer */
+.main-footer {
+    background-color: #14532d;
+    color: white;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .container {
+        width: 92%;
+    }
+
+    .grid-2col,
+    .grid-3col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-nav ul {
+        gap: 12px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+    }
+
+    .grid-2col,
+    .grid-3col,
+    .gallery-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+
+    .section-card h2 {
+        font-size: 23px;
+    }
+
+    .timeline-container {
+        padding-left: 18px;
+    }
+}
+</style>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <strong>ImpactPortal</strong>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                    <li><a href="#reports">Weekly Reports</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#volunteers">Volunteers</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Project GreenReach: Urban Reforestation</h1>
+            <p>Documenting our journey to transform vacant city spaces into thriving community pockets parks and community gardens.</p>
+            <a href="#overview" class="btn-primary">Explore Our Impact</a>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <section id="overview" class="section-card">
+            <h2>Project Overview & Objectives</h2>
+            <div class="grid-2col">
+                <div>
+                    <h3>Core Objectives</h3>
+                    <p>Project GreenReach aims to mitigate urban heat islands and improve local biodiversity by planting native trees and establishing community-managed gardens.</p>
+                    <ul class="bullet-list">
+                        <li><strong>Environmental Clean-up:</strong> Revitalize 3 neglected urban lots.</li>
+                        <li><strong>Green Canopy:</strong> Plant over 150 native trees and shrubs.</li>
+                        <li><strong>Education:</strong> Host 4 community workshops on sustainable urban agriculture.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Beneficiaries & Outcomes</h3>
+                    <p>The primary beneficiaries are the 1,200 residents of the Oakwood District, who previously lacked immediate access to safe, clean public green spaces.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">1,200+</span>
+                            <span class="stat-label">Residents Impacted</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">154</span>
+                            <span class="stat-label">Trees Planted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="section-card">
+            <h2>Implementation Stages & Timeline</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-badge">Stage 1</div>
+                    <div class="timeline-content">
+                        <h3>Site Assessment & Permitting</h3>
+                        <span class="date-tag">Weeks 1 - 2</span>
+                        <p>Soil testing, securing municipal permits, and conducting neighborhood survey assessments to gauge community needs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">Stage 2</div>
+                    <div class="timeline-content">
+                        <h3>Clearance & Infrastructure</h3>
+                        <span class="date-tag">Weeks 3 - 4</span>
+                        <p>Debris removal, installing eco-friendly irrigation systems, and laying down organic topsoil paths.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">Stage 3</div>
+                    <div class="timeline-content">
+                        <h3>Planting & Community Build</h3>
+                        <span class="date-tag">Weeks 5 - 6</span>
+                        <p>Volunteers planted native tree varieties, erected raised garden beds, and installed community benches.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reports" class="section-card">
+            <h2>Weekly Progress Reports</h2>
+            <div class="table-responsive">
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Activities Completed</th>
+                            <th>Milestones Achieved</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Week 1</strong></td>
+                            <td>Soil toxicity analysis, mapped boundary grid lines.</td>
+                            <td>Site safety cleared; blueprints approved.</td>
+                            <td><span class="status-pill status-complete">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 2</strong></td>
+                            <td>Community town hall meeting, volunteer onboarding.</td>
+                            <td>Enlisted 45 neighborhood volunteers.</td>
+                            <td><span class="status-pill status-complete">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 3</strong></td>
+                            <td>Removed 2.5 tons of trash, graded uneven terrain.</td>
+                            <td>Land cleared for layout deployment.</td>
+                            <td><span class="status-pill status-complete">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 4</strong></td>
+                            <td>Installed main water splitters, laid grid mulch lines.</td>
+                            <td>Irrigation lines fully operational.</td>
+                            <td><span class="status-pill status-complete">Complete</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Week 5</strong></td>
+                            <td>Mass planting drive, assembled 6 timber garden boxes.</td>
+                            <td>120 trees and all structural boxes placed.</td>
+                            <td><span class="status-pill status-progress">In Progress</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="gallery" class="section-card">
+            <h2>Activity Photo Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">Site Prep & Excavation</div>
+                    <p class="gallery-caption">Volunteers clearing baseline rocks during Week 3.</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">Community Planting Day</div>
+                    <p class="gallery-caption">Local youth helping plant the central Oak tree.</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">Garden Beds Assembly</div>
+                    <p class="gallery-caption">Building modern cedar raised beds for vegetables.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="volunteers" class="section-card">
+            <h2>Volunteer Directory</h2>
+            <div class="grid-3col">
+                <div class="volunteer-card">
+                    <h4>Sarah Jenkins</h4>
+                    <p class="role-tag">Project Coordinator</p>
+                    <p>Oversees site logistics, municipal coordination, and weekly reporting timelines.</p>
+                </div>
+                <div class="volunteer-card">
+                    <h4>Marcus Vance</h4>
+                    <p class="role-tag">Horticulture Lead</p>
+                    <p>Selects native plant species, manages soil structure, and monitors irrigation health.</p>
+                </div>
+                <div class="volunteer-card">
+                    <h4>Elena Rostova</h4>
+                    <p class="role-tag">Outreach Captain</p>
+                    <p>Coordinates volunteer rosters, neighborhood updates, and educational workshops.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Project GreenReach Documentation Portal. Open-source community project.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

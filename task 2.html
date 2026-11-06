@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Crumbs Bakery</title>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fffaf5;
+            color: #4b3028;
+        }
+
+  
+        header {
+            background: #fff;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px #00000010;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            color: #9b4f3c;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4b3028;
+            margin-left: 25px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #c56b52;
+        }
+
+   
+        .hero {
+            min-height: 500px;
+            background:
+                linear-gradient(90deg, #fff0e5 45%, #fff0e500),
+                url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1400&q=85');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+        }
+
+        .hero-content {
+            max-width: 520px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #713b2d;
+        }
+
+        .hero p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 28px;
+            color: #75564a;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #9b4f3c;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #713b2d;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 65px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #713b2d;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #92766a;
+            font-size: 14px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .category-btn {
+            padding: 10px 22px;
+            border: 1px solid #e6c9b7;
+            background: white;
+            color: #713b2d;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #9b4f3c;
+            color: white;
+        }
+
+     
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px #7b4c3712;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px #7b4c3720;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-size: 13px;
+            color: #92766a;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            color: #9b4f3c;
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        .add-btn {
+            background: #f4e3d7;
+            color: #713b2d;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .add-btn:hover {
+            background: #9b4f3c;
+            color: white;
+        }
+
+        .custom-section {
+            background: #f8e9df;
+        }
+
+        .custom-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .custom-container img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .custom-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: #713b2d;
+            margin-bottom: 20px;
+        }
+
+        .custom-content p {
+            line-height: 1.8;
+            color: #795548;
+            margin-bottom: 20px;
+        }
+
+        .custom-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .custom-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e6c9b7;
+        }
+
+        /* Offers */
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .offer-card {
+            padding: 35px;
+            border-radius: 18px;
+            text-align: center;
+            background: #f8e5e3;
+        }
+
+        .offer-card:nth-child(2) {
+            background: #f5ead4;
+        }
+
+        .offer-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: #9b4f3c;
+            margin-bottom: 10px;
+        }
+
+        .offer-card p {
+            color: #795548;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .offer-tag {
+            display: inline-block;
+            background: #9b4f3c;
+            color: white;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+      
+        .contact-section {
+            background: #713b2d;
+            color: white;
+        }
+
+        .contact-section .section-title h2 {
+            color: white;
+        }
+
+        .contact-section .section-title p {
+            color: #f0d7c9;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .contact-card {
+            background: #80503f;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .contact-card p {
+            color: #f0d7c9;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+       
+        footer {
+            background: #4b3028;
+            color: #f0d7c9;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        .cart-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+            box-shadow: 0 5px 20px #7b4c3712;
+            display: none;
+        }
+
+        .cart-box h3 {
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #9b4f3c;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-toggle {
+            background: #f4e3d7;
+            color: #713b2d;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .remove-btn {
+            border: none;
+            background: transparent;
+            color: #b24d4d;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .custom-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 18px 5%;
+            }
+
+            nav a {
+                margin-left: 12px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 50px 6%;
+                background-position: 60% center;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            section {
+                padding: 45px 6%;
+            }
+
+            .section-title h2 {
+                font-size: 29px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .offer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .custom-content h2 {
+                font-size: 30px;
+            }
+
+            .custom-container img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <div class="logo">Sweet Crumbs</div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Our Menu</a>
+            <a href="#custom">Custom Cakes</a>
+            <a href="#offers">Offers</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="cart-toggle" onclick="toggleCart()">
+            🛍 Cart (<span id="cart-count">0</span>)
+        </button>
+    </header>
+
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>A Little Sweetness Makes Life Beautiful</h1>
+
+            <p>
+                Discover freshly baked cakes, delicious pastries,
+                and handmade cookies. Every bite is made with love
+                and the finest ingredients.
+            </p>
+
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="section-title">
+            <h2>Our Delicious Treats</h2>
+            <p>Freshly baked happiness for every occasion.</p>
+        </div>
+
+        <div class="categories">
+            <button class="category-btn active"
+                onclick="filterProducts('all', this)">
+                All
+            </button>
+
+            <button class="category-btn"
+                onclick="filterProducts('cakes', this)">
+                Cakes
+            </button>
+
+            <button class="category-btn"
+                onclick="filterProducts('pastries', this)">
+                Pastries
+            </button>
+
+            <button class="category-btn"
+                onclick="filterProducts('cookies', this)">
+                Cookies
+            </button>
+        </div>
+
+  
+        <div class="product-grid" id="product-grid">
+
+        
+            <div class="product-card" data-category="cakes">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80"
+                    alt="Chocolate birthday cake">
+
+                <div class="product-info">
+                    <h3>Velvet Dream Cake</h3>
+                    <p>Rich red velvet cake with creamy frosting.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹850</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Velvet Dream Cake', 850)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cakes">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80"
+                    alt="Chocolate truffle cake">
+
+                <div class="product-info">
+                    <h3>Chocolate Truffle</h3>
+                    <p>Chocolate layers covered with rich ganache.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹950</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Chocolate Truffle', 950)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cakes">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=700&q=80"
+                    alt="Strawberry cake">
+
+                <div class="product-info">
+                    <h3>Strawberry Bliss</h3>
+                    <p>Fresh strawberries and soft vanilla cream.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹780</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Strawberry Bliss', 780)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+   
+            <div class="product-card" data-category="pastries">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80"
+                    alt="Fresh croissant">
+
+                <div class="product-info">
+                    <h3>Butter Croissant</h3>
+                    <p>Golden, flaky, and freshly baked.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹120</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Butter Croissant', 120)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pastries">
+                <img src="https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=700&q=80"
+                    alt="Chocolate pastry">
+
+                <div class="product-info">
+                    <h3>Chocolate Éclair</h3>
+                    <p>Delicate pastry filled with chocolate cream.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹150</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Chocolate Eclair', 150)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pastries">
+                <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=700&q=80"
+                    alt="Blueberry pastry">
+
+                <div class="product-info">
+                    <h3>Blueberry Danish</h3>
+                    <p>A sweet pastry with juicy blueberries.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹140</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Blueberry Danish', 140)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+       
+            <div class="product-card" data-category="cookies">
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80"
+                    alt="Chocolate chip cookies">
+
+                <div class="product-info">
+                    <h3>Choco Chip Cookies</h3>
+                    <p>Crispy edges with delicious chocolate chips.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹180</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Choco Chip Cookies', 180)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cookies">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=700&q=80"
+                    alt="Butter cookies">
+
+                <div class="product-info">
+                    <h3>Butter Shortbread</h3>
+                    <p>Delicate, buttery cookies that melt in your mouth.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹160</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Butter Shortbread', 160)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cookies">
+                <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=700&q=80"
+                    alt="French macarons">
+
+                <div class="product-info">
+                    <h3>Macaron Box</h3>
+                    <p>Colorful French macarons in assorted flavors.</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹350</span>
+
+                        <button class="add-btn"
+                            onclick="addToCart('Macaron Box', 350)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cart-box" id="cart-box">
+            <div class="cart-header">
+                <h3>Your Shopping Cart 🛍</h3>
+
+                <button class="remove-btn" onclick="clearCart()">
+                    Clear Cart
+                </button>
+            </div>
+
+            <div id="cart-items">
+                <p>Your cart is empty.</p>
+            </div>
+
+            <div class="cart-total">
+                Total: ₹<span id="cart-total">0</span>
+            </div>
+
+            <button class="btn" onclick="checkout()"
+                style="margin-top: 20px;">
+                Place Order
+            </button>
+        </div>
+    </section>
+
+
+    <section class="custom-section" id="custom">
+        <div class="custom-container">
+
+            <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=900&q=80"
+                alt="Custom designed birthday cake">
+
+            <div class="custom-content">
+                <h2>Your Dream Cake, Our Creation</h2>
+
+                <p>
+                    Make every celebration unforgettable with our
+                    beautifully designed custom cakes. Choose your
+                    flavor, color, theme, and decoration.
+                </p>
+
+                <ul class="custom-list">
+                    <li>🎂 Birthday Cakes — ₹1,200 onwards</li>
+                    <li>💐 Floral Cakes — ₹1,800 onwards</li>
+                    <li>💍 Wedding Cakes — ₹3,500 onwards</li>
+                    <li>🎨 Theme Cakes — ₹1,500 onwards</li>
+                </ul>
+
+                <a href="#contact" class="btn">
+                    Order a Custom Cake
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="offers">
+        <div class="section-title">
+            <h2>Sweet Seasonal Offers</h2>
+            <p>More sweetness, more happiness!</p>
+        </div>
+
+        <div class="offer-grid">
+
+            <div class="offer-card">
+                <span class="offer-tag">Birthday Special</span>
+
+                <h3>15% OFF</h3>
+
+                <p>
+                    Celebrate your special day with our delicious
+                    custom cakes and enjoy a sweet discount.
+                </p>
+            </div>
+
+            <div class="offer-card">
+                <span class="offer-tag">Cookie Festival</span>
+
+                <h3>Buy 2 Get 1</h3>
+
+                <p>
+                    Buy two cookie boxes and get one extra box
+                    absolutely free!
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-title">
+            <h2>Visit Our Bakery</h2>
+            <p>We would love to make your day sweeter.</p>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+                <h3>📍 Our Location</h3>
+
+                <p>
+                    Sweet Crumbs Bakery<br>
+                    Hyderabad, Telangana<br>
+                    India
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <h3>🕒 Opening Hours</h3>
+
+                <p>
+                    Monday – Sunday<br>
+                    9:00 AM – 9:00 PM<br>
+                    Open Every Day
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <h3>📞 Contact Us</h3>
+
+                <p>
+                    Phone: +91 98765 43210<br>
+                    Email: hello@sweetcrumbs.example<br>
+                    Instagram: @sweetcrumbs
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+  
+    <footer>
+        <p>
+            © 2026 Sweet Crumbs Bakery.
+            Baked with Love, Shared with Joy. ❤️
+        </p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({
+                name: name,
+                price: price
+            });
+
+            updateCart();
+
+            alert(name + " added to your cart!");
+        }
+
+    
+        function updateCart() {
+            document.getElementById("cart-count").innerText =
+                cart.length;
+
+            let cartItems = document.getElementById("cart-items");
+            let total = 0;
+
+            cartItems.innerHTML = "";
+
+            if (cart.length === 0) {
+                cartItems.innerHTML =
+                    "<p>Your cart is empty.</p>";
+            }
+
+            cart.forEach(function(item, index) {
+                total += item.price;
+
+                let div = document.createElement("div");
+                div.className = "cart-item";
+
+                let name = document.createElement("span");
+                name.textContent = item.name + " - ₹" + item.price;
+
+                let remove = document.createElement("button");
+                remove.className = "remove-btn";
+                remove.textContent = "Remove";
+
+                remove.onclick = function() {
+                    removeItem(index);
+                };
+
+                div.appendChild(name);
+                div.appendChild(remove);
+
+                cartItems.appendChild(div);
+            });
+
+            document.getElementById("cart-total").innerText =
+                total;
+        }
+    
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCart();
+        }
+
+
+        function toggleCart() {
+            let cartBox = document.getElementById("cart-box");
+
+            if (cartBox.style.display === "block") {
+                cartBox.style.display = "none";
+            } else {
+                cartBox.style.display = "block";
+            }
+        }
+
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            let total = cart.reduce(function(sum, item) {
+                return sum + item.price;
+            }, 0);
+
+            alert(
+                "Thank you for choosing Sweet Crumbs Bakery!\n" +
+                "Your total amount is ₹" + total +
+                ".\nPlease contact the bakery to confirm your order."
+            );
+        }
+
+
+        function filterProducts(category, button) {
+            let products =
+                document.querySelectorAll(".product-card");
+
+            let buttons =
+                document.querySelectorAll(".category-btn");
+
+            buttons.forEach(function(btn) {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            products.forEach(function(product) {
+                if (
+                    category === "all" ||
+                    product.dataset.category === category
+                ) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
+apply css part

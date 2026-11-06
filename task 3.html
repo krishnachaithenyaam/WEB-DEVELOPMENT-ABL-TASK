@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutriLife | Healthy Food & Recipes</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f8faf5;
+    color: #26352a;
+}
+
+header {
+    background: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px #00000008;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: #27864b;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: #37483a;
+    margin-left: 24px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #27864b;
+}
+
+.hero {
+    padding: 70px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    background: #eaf5e7;
+}
+
+.hero-content {
+    max-width: 520px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #27864b;
+}
+
+.hero p {
+    color: #607064;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.hero img {
+    width: 45%;
+    max-width: 500px;
+    border-radius: 25px;
+    object-fit: cover;
+}
+
+.btn {
+    display: inline-block;
+    background: #27864b;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #176b37;
+}
+
+section {
+    padding: 55px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.section-heading p {
+    color: #718073;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.category {
+    background: white;
+    border: 1px solid #dce8dc;
+    padding: 12px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    color: #354b3a;
+}
+
+.category.active,
+.category:hover {
+    background: #27864b;
+    color: white;
+}
+
+.search {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto 30px;
+    padding: 15px;
+    border: 1px solid #dce8dc;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.recipe-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #00000008;
+    transition: transform 0.2s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.recipe-info {
+    padding: 20px;
+}
+
+.recipe-info h3 {
+    margin-bottom: 10px;
+}
+
+.recipe-info p {
+    color: #718073;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: #27864b;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.details-btn {
+    width: 100%;
+    background: #eaf5e7;
+    color: #27864b;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.details-btn:hover {
+    background: #d6ebd2;
+}
+
+.meal-plan {
+    background: #eaf5e7;
+}
+
+.meal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.meal-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.meal-card .emoji {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.meal-card h3 {
+    color: #27864b;
+    margin-bottom: 10px;
+}
+
+.meal-card p {
+    color: #718073;
+    line-height: 1.7;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.tip {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    border-left: 4px solid #27864b;
+}
+
+.tip h3 {
+    margin-bottom: 10px;
+}
+
+.tip p {
+    color: #718073;
+    line-height: 1.7;
+}
+
+footer {
+    background: #203c2a;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    line-height: 1.8;
+}
+
+/* Recipe details dialog */
+
+dialog {
+    width: 90%;
+    max-width: 550px;
+    margin: auto;
+    padding: 30px;
+    border: none;
+    border-radius: 18px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+dialog::backdrop {
+    background: #00000080;
+}
+
+dialog h2 {
+    color: #27864b;
+    margin-bottom: 15px;
+}
+
+dialog h3 {
+    margin: 20px 0 10px;
+}
+
+dialog li {
+    margin: 8px 0 8px 20px;
+    line-height: 1.5;
+}
+
+.close-btn {
+    margin-top: 20px;
+    background: #27864b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+        font-size: 14px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 45px 6%;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero img {
+        width: 100%;
+    }
+
+    .recipe-grid,
+    .meal-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 40px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🥗 NutriLife</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#meal-plan">Meal Plans</a>
+        <a href="#tips">Healthy Tips</a>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Eat Healthy.<br><span>Live Better.</span></h1>
+
+        <p>
+            Discover delicious and nutritious recipes, create balanced
+            meal plans, and build healthy eating habits every day.
+        </p>
+
+        <a href="#recipes" class="btn">Explore Recipes</a>
+    </div>
+
+    <img
+        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80"
+        alt="Healthy vegetable salad"
+    >
+</section>
+
+<!-- Recipe Section -->
+
+<section id="recipes">
+    <div class="section-heading">
+        <h2>Healthy Recipes</h2>
+        <p>Fresh ingredients. Delicious meals. Better health.</p>
+    </div>
+
+    <input
+        type="text"
+        class="search"
+        id="search"
+        placeholder="🔍 Search recipes..."
+    >
+
+    <div class="categories">
+        <button class="category active" data-category="All">All</button>
+        <button class="category" data-category="Breakfast">Breakfast</button>
+        <button class="category" data-category="Lunch">Lunch</button>
+        <button class="category" data-category="Dinner">Dinner</button>
+        <button class="category" data-category="Vegetarian">Vegetarian</button>
+        <button class="category" data-category="High Protein">High Protein</button>
+        <button class="category" data-category="Smoothies">Smoothies</button>
+    </div>
+
+    <div class="recipe-grid" id="recipeGrid"></div>
+</section>
+
+<!-- Meal Plan Section -->
+
+<section class="meal-plan" id="meal-plan">
+    <div class="section-heading">
+        <h2>Daily Healthy Meal Plan</h2>
+        <p>A simple guide to balanced eating throughout the day.</p>
+    </div>
+
+    <div class="meal-grid">
+
+        <div class="meal-card">
+            <div class="emoji">🌅</div>
+            <h3>Breakfast</h3>
+            <p>Oatmeal with fruits<br>Approx. 300 kcal</p>
+        </div>
+
+        <div class="meal-card">
+            <div class="emoji">☀️</div>
+            <h3>Lunch</h3>
+            <p>Brown rice, dal and vegetables<br>Approx. 450 kcal</p>
+        </div>
+
+        <div class="meal-card">
+            <div class="emoji">🍎</div>
+            <h3>Snack</h3>
+            <p>Apple and almonds<br>Approx. 180 kcal</p>
+        </div>
+
+        <div class="meal-card">
+            <div class="emoji">🌙</div>
+            <h3>Dinner</h3>
+            <p>Vegetable soup and roti<br>Approx. 350 kcal</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Healthy Tips -->
+
+<section id="tips">
+    <div class="section-heading">
+        <h2>Healthy Eating Tips</h2>
+        <p>Small changes can make a big difference.</p>
+    </div>
+
+    <div class="tips-grid">
+
+        <div class="tip">
+            <h3>💧 Stay Hydrated</h3>
+            <p>
+                Drink water regularly throughout the day.
+                Your hydration needs depend on activity and climate.
+            </p>
+        </div>
+
+        <div class="tip">
+            <h3>🥦 Eat More Vegetables</h3>
+            <p>
+                Include a variety of colorful vegetables and fruits
+                to get essential vitamins and minerals.
+            </p>
+        </div>
+
+        <div class="tip">
+            <h3>🍚 Choose Balanced Meals</h3>
+            <p>
+                Combine whole grains, protein, vegetables,
+                and healthy fats for a balanced diet.
+            </p>
+        </div>
+
+        <div class="tip">
+            <h3>🍬 Limit Added Sugar</h3>
+            <p>
+                Reduce sugary drinks and sweets.
+                Choose whole fruits for natural sweetness.
+            </p>
+        </div>
+
+        <div class="tip">
+            <h3>⏰ Eat Regularly</h3>
+            <p>
+                Plan regular meals and snacks according to
+                your hunger, routine, and nutritional needs.
+            </p>
+        </div>
+
+        <div class="tip">
+            <h3>🥜 Choose Healthy Snacks</h3>
+            <p>
+                Try fruits, nuts, yogurt, or roasted
+                chickpeas instead of highly processed snacks.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <h2>🥗 NutriLife</h2>
+    <p>Healthy Food • Healthy Mind • Healthy Life</p>
+    <p>© 2026 NutriLife. Eat well, live well.</p>
+</footer>
+
+<!-- Recipe Details Dialog -->
+
+<dialog id="recipeDialog">
+    <div id="recipeDetails"></div>
+    <button class="close-btn" onclick="recipeDialog.close()">
+        Close
+    </button>
+</dialog>
+
+<script>
+const recipes = [
+    {
+        name: "Avocado Toast",
+        category: ["Breakfast", "Vegetarian"],
+        calories: 280,
+        time: "10 min",
+        image: "photo-1525351484163-7529414344d8",
+        description: "Whole-grain toast topped with creamy avocado.",
+        ingredients: [
+            "2 slices whole-grain bread",
+            "1/2 ripe avocado",
+            "1 teaspoon lemon juice",
+            "Salt and pepper"
+        ],
+        instructions: [
+            "Toast the bread until golden.",
+            "Mash avocado with lemon juice.",
+            "Spread avocado on toast.",
+            "Season and serve."
+        ]
+    },
+    {
+        name: "Protein Power Bowl",
+        category: ["Lunch", "High Protein"],
+        calories: 420,
+        time: "20 min",
+        image: "photo-1512621776951-a57141f2eefd",
+        description: "A balanced bowl of grains, vegetables, and protein.",
+        ingredients: [
+            "1 cup cooked quinoa",
+            "100 g grilled chicken or tofu",
+            "1/2 cup broccoli",
+            "1/2 cup carrots",
+            "Lemon dressing"
+        ],
+        instructions: [
+            "Cook quinoa according to instructions.",
+            "Grill chicken or tofu.",
+            "Steam the vegetables.",
+            "Combine everything in a bowl."
+        ]
+    },
+    {
+        name: "Berry Smoothie",
+        category: ["Breakfast", "Smoothies", "Vegetarian"],
+        calories: 220,
+        time: "5 min",
+        image: "photo-1505252585461-04db1eb84625",
+        description: "A refreshing smoothie with berries and yogurt.",
+        ingredients: [
+            "1 cup mixed berries",
+            "1/2 cup plain yogurt",
+            "1/2 banana",
+            "1/2 cup milk"
+        ],
+        instructions: [
+            "Add all ingredients to a blender.",
+            "Blend until smooth.",
+            "Pour into a glass and enjoy."
+        ]
+    },
+    {
+        name: "Vegetable Stir Fry",
+        category: ["Dinner", "Vegetarian"],
+        calories: 310,
+        time: "15 min",
+        image: "photo-1512058564366-18510be2db19",
+        description: "Colorful vegetables cooked with light seasoning.",
+        ingredients: [
+            "1 cup broccoli",
+            "1/2 cup bell peppers",
+            "1/2 cup carrots",
+            "1 teaspoon olive oil",
+            "Soy sauce and garlic"
+        ],
+        instructions: [
+            "Heat oil in a pan.",
+            "Add garlic and vegetables.",
+            "Stir fry until tender.",
+            "Add seasoning and serve."
+        ]
+    },
+    {
+        name: "Greek Yogurt Bowl",
+        category: ["Breakfast", "High Protein"],
+        calories: 260,
+        time: "5 min",
+        image: "photo-1488477181946-6428a0291777",
+        description: "Creamy yogurt with fruit and crunchy nuts.",
+        ingredients: [
+            "1 cup Greek yogurt",
+            "1/2 cup berries",
+            "1 tablespoon almonds",
+            "1 teaspoon honey"
+        ],
+        instructions: [
+            "Add yogurt to a bowl.",
+            "Top with berries and almonds.",
+            "Drizzle honey and serve."
+        ]
+    },
+    {
+        name: "Chickpea Salad",
+        category: ["Lunch", "Vegetarian", "High Protein"],
+        calories: 350,
+        time: "10 min",
+        image: "photo-1540420773420-3366772f4999",
+        description: "A fresh salad rich in fiber and plant protein.",
+        ingredients: [
+            "1 cup cooked chickpeas",
+            "1 tomato",
+            "1 cucumber",
+            "1/4 onion",
+            "Lemon juice and olive oil"
+        ],
+        instructions: [
+            "Wash and chop the vegetables.",
+            "Add chickpeas to a bowl.",
+            "Mix in the vegetables.",
+            "Add dressing and serve."
+        ]
+    }
+];
+
+const recipeGrid = document.getElementById("recipeGrid");
+const searchInput = document.getElementById("search");
+const categoryButtons = document.querySelectorAll(".category");
+const recipeDialog = document.getElementById("recipeDialog");
+const recipeDetails = document.getElementById("recipeDetails");
+
+let selectedCategory = "All";
+
+function renderRecipes() {
+    const searchText = searchInput.value.toLowerCase();
+
+    const filteredRecipes = recipes.filter(recipe => {
+        const matchesCategory =
+            selectedCategory === "All" ||
+            recipe.category.includes(selectedCategory);
+
+        const matchesSearch =
+            recipe.name.toLowerCase().includes(searchText) ||
+            recipe.description.toLowerCase().includes(searchText);
+
+        return matchesCategory && matchesSearch;
+    });
+
+    recipeGrid.innerHTML = "";
+
+    if (filteredRecipes.length === 0) {
+        recipeGrid.innerHTML =
+            "<p>No recipes found. Try another search.</p>";
+        return;
+    }
+
+    filteredRecipes.forEach(recipe => {
+        const card = document.createElement("article");
+        card.className = "recipe-card";
+
+        const image = document.createElement("img");
+        image.src =
+            `https://images.unsplash.com/${recipe.image}?auto=format&fit=crop&w=700&q=80`;
+        image.alt = recipe.name;
+        image.loading = "lazy";
+
+        const info = document.createElement("div");
+        info.className = "recipe-info";
+
+        const title = document.createElement("h3");
+        title.textContent = recipe.name;
+
+        const description = document.createElement("p");
+        description.textContent = recipe.description;
+
+        const meta = document.createElement("div");
+        meta.className = "recipe-meta";
+        meta.textContent =
+            `${recipe.time} | ${recipe.calories} kcal`;
+
+        const button = document.createElement("button");
+        button.className = "details-btn";
+        button.textContent = "View Recipe";
+
+        button.addEventListener("click", () => {
+            showRecipe(recipe);
+        });
+
+        info.append(title, description, meta, button);
+        card.append(image, info);
+        recipeGrid.appendChild(card);
+    });
+}
+
+function showRecipe(recipe) {
+    recipeDetails.innerHTML = "";
+
+    const title = document.createElement("h2");
+    title.textContent = recipe.name;
+
+    const calories = document.createElement("p");
+    calories.textContent =
+        `🔥 ${recipe.calories} kcal | ⏱ ${recipe.time}`;
+
+    const ingredientHeading = document.createElement("h3");
+    ingredientHeading.textContent = "Ingredients";
+
+    const ingredientList = document.createElement("ul");
+
+    recipe.ingredients.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ingredientList.appendChild(li);
+    });
+
+    const instructionHeading = document.createElement("h3");
+    instructionHeading.textContent = "Cooking Instructions";
+
+    const instructionList = document.createElement("ol");
+
+    recipe.instructions.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        instructionList.appendChild(li);
+    });
+
+    recipeDetails.append(
+        title,
+        calories,
+        ingredientHeading,
+        ingredientList,
+        instructionHeading,
+        instructionList
+    );
+
+    recipeDialog.showModal();
+}
+
+categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        categoryButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+        selectedCategory = button.dataset.category;
+
+        renderRecipes();
+    });
+});
+
+searchInput.addEventListener("input", renderRecipes);
+
+renderRecipes();
+</script>
+
+</body>
+</html>
